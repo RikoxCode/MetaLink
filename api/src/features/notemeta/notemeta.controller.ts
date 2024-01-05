@@ -25,6 +25,35 @@ import {
 export class NotemetaController {
   constructor(private readonly NotemetaService: NotemetaService) {}
 
+  @Get('latest')
+  @ApiResponse({
+    status: 200,
+    description: 'Get the latest Archive Items',
+    type: SwaggerItem, // Hier sollte der Typ Ihrer Antwort stehen
+    isArray: true,
+  })
+  @ApiResponse({ status: 500, description: 'Internal Server Error' })
+  async getLatestUpdates() {
+    try {
+      BaseFunctions._log(
+        'Find latest Archive Items',
+        '200',
+        'GET',
+        '/api/notemeta/latest',
+      );
+      return this.NotemetaService.getLatestUpdates();
+    } catch (error) {
+      BaseFunctions._log(
+        'Internal Server Error',
+        '500',
+        'GET',
+        '/api/notemeta/latest',
+      );
+      return error;
+    }
+  }
+
+
   @Get()
   @ApiResponse({
     status: 200,

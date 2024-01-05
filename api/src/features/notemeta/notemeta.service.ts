@@ -10,6 +10,15 @@ export class NotemetaService {
         private notemetaModel: mongoose.Model<Notemeta>        
     ) {}
 
+    async getLatestUpdates(): Promise<Notemeta[]> {
+        try {
+            const items: Promise<Notemeta[]> = this.notemetaModel.find().sort({updatedAt: -1}).limit(10);
+            return items;
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
+
     findAll(): Promise<Notemeta[]> {
         try {
             const items: Promise<Notemeta[]> = this.notemetaModel.find();
@@ -36,6 +45,14 @@ export class NotemetaService {
         }
     }
 
+    async update(id: string, notemeta: Notemeta) {
+        try {
+            return this.notemetaModel.findByIdAndUpdate(id, notemeta, { new: true });
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
+
     async delete(id: string) {
         try {
             return this.notemetaModel.deleteOne({ _id: id });
@@ -47,14 +64,6 @@ export class NotemetaService {
     async deleteAll() {
         try {
             return this.notemetaModel.deleteMany({});
-        } catch (error) {
-            throw new Error(error);
-        }
-    }
-
-    async update(id: string, notemeta: Notemeta) {
-        try {
-            return this.notemetaModel.findByIdAndUpdate(id, notemeta, { new: true });
         } catch (error) {
             throw new Error(error);
         }

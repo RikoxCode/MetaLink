@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { NotemetaModule } from './features/notemeta/notemeta.module';
+import { ApiInfosController } from './features/api-infos/api-infos.controller';
 
 @Module({
   imports: [
@@ -14,7 +15,7 @@ import { NotemetaModule } from './features/notemeta/notemeta.module';
     MongooseModule.forRoot(process.env.DB_URI),
     NotemetaModule
   ],
-  controllers: [AppController],
+  controllers: [AppController, ApiInfosController],
   providers: [AppService],
 })
 export class AppModule {}
