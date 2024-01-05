@@ -11,10 +11,4 @@ services:
       - "3000"
     ports:
       - "3000:3000"
-    command: "npm run start:docker"
-  mongodb:
-    image: mongo
-    ports:
-      - "27017:27017"
-    volumes:
-      - ./data:/data/db
+    command: "npm run start:prod"

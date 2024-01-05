@@ -111,7 +111,7 @@ export class NotemetaController {
     }
   }
 
-  @Delete(':id')
+  @Delete('deleteone:id')
   @ApiResponse({
     status: 200,
     description: 'Delete a Archive Items',
@@ -135,6 +135,34 @@ export class NotemetaController {
         '500',
         'DELETE',
         '/api/notemeta/{id}',
+      );
+      return error;
+    }
+  }
+
+  @Delete('deleteall')
+  @ApiResponse({
+    status: 200,
+    description: 'Delete all Archive Items',
+    type: SwaggerDelete, // Hier sollte der Typ Ihrer Antwort stehen
+    isArray: false,
+  })
+  @ApiResponse({ status: 500, description: 'Internal Server Error' })
+  async deleteAll() {
+    try {
+      BaseFunctions._log(
+        'Delete all Archive Items',
+        '200',
+        'DELETE',
+        '/api/notemeta',
+      );
+      return this.NotemetaService.deleteAll();
+    } catch (error) {
+      BaseFunctions._log(
+        'Internal Server Error! Maybe you forgot the item ID? ',
+        '500',
+        'DELETE',
+        '/api/notemeta',
       );
       return error;
     }
