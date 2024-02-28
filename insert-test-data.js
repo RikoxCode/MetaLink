@@ -1,10 +1,10 @@
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 // import the test-data.json file
-const testData = require('./test-data.json').testdata;
+const testData = require('./test-data.json').real_data;
 
 // function to get the API URL
-const apiURL = "http://localhost:3000/api/";
+const apiURL = "http://10.2.2.16:3000/api/";
 
 // function to request the API
 function createData() {
